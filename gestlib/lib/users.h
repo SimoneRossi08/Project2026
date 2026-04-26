@@ -1,37 +1,37 @@
-#ifndef UTENTI_H
-#define UTENTI_H
+#include <stdio.h>
+#include <stdlib.h>
 
-#include "prestiti.h"   /* forward-include per NodoPrestito */
+typedef struct {
+    int id;
+    char *nome;
+    // Lista collegata prestiti da completare
 
-#define MAX_NOME    128
-#define MAX_EMAIL   128
-#define MAX_TEL      32
-
-typedef struct Utente {
-    int    id;
-    char   nome[MAX_NOME];
-    char   email[MAX_EMAIL];
-    char   telefono[MAX_TEL];
-    int    prestiti_totali;   /* storico cumulativo */
-
-    /* lista collegata dei prestiti ATTIVI */
-    struct NodoPrestito *prestiti;
 } Utente;
 
-extern Utente **utenti;
-extern int      num_utenti;
-extern int      cap_utenti;
+void registraUtente(Utente* utenti, int *utenti_size);
+void eliminaUtente(Utente* utenti, int *utenti_size);
+void stampaUtenti(Utente* utenti, int utenti_size);
 
-void    utenti_init(void);
-void    utenti_free(void);
+// Registra un nuovo utente e aggiunge alla lista
+// Utenti è il puntatore al vettore di utenti
+// utenti_size è il puntatore al numero di elementi attuali nel vettore
 
-Utente *utente_nuovo(const char *nome, const char *email, const char *tel);
-int     utente_aggiungi(Utente *u);
-int     utente_elimina(int id);
-Utente *utente_cerca_id(int id);
-Utente *utente_cerca_nome(const char *nome);
+void registraUtente(Utente* utenti, int *utenti_size) {
+    // Implementazione da completare
+}
 
-void    utente_stampa_storico(int id);
-void    utenti_stampa_tutti(void);
+// Elimina un utente dalla lista e rimuove prestiti associati
+// Utenti è il puntatore al vettore di utenti
+// utenti_size è il puntatore al numero di elementi attuali nel vettore
 
-#endif /* UTENTI_H */
+void eliminaUtente(Utente* utenti, int *utenti_size) {
+    // Implementazione da completare
+}
+
+// Stampa tutti gli utenti
+// Utenti è il puntatore al vettore di utenti
+// utenti_size è il numero di elementi attuali nel vettore
+
+void stampaUtenti(Utente* utenti, int utenti_size) {
+    // Implementazione da completare
+}

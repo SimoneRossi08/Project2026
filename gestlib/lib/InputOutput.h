@@ -1,28 +1,19 @@
-#ifndef FILE_IO_H
-#define FILE_IO_H
+#include <stdio.h>
 
-#define FILE_LIBRI    "data/libri.csv"
-#define FILE_UTENTI   "data/utenti.csv"
-#define FILE_PRESTITI "data/prestiti.csv"
-#define FILE_STORICO  "data/storico.csv"
+void caricaLibriCSV(Libro* libri, int *libri_size);
+void caricaUtentiCSV(Utente* utenti, int *utenti_size);
+void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size);
 
-/* Caricamento all'avvio */
-int carica_libri(void);
-int carica_utenti(void);
-int carica_prestiti(void);
-int carica_storico(void);
+// Carica dati dai file CSV e popola i vettori di libri, utenti e prestiti
 
-/* Salvataggio alla chiusura */
-int salva_libri(void);
-int salva_utenti(void);
-int salva_prestiti(void);
-int salva_storico(void);
+void caricaLibriCSV(Libro* libri, int *libri_size) {
+    // Implementazione da completare
+}
 
-/* Wrapper: carica tutto / salva tutto */
-void carica_tutto(void);
-void salva_tutto(void);
+void caricaUtentiCSV(Utente* utenti, int *utenti_size) {
+    // Implementazione da completare
+}
 
-/* utility CSV */
-void csv_escape(const char *src, char *dst, int dst_len);
-
-#endif /* FILE_IO_H */
+void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size) {
+    // Implementazione da completare
+}

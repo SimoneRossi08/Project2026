@@ -1,45 +1,48 @@
-#ifndef LIBRI_H
-#define LIBRI_H
+#include <stdio.h>
+#include <stdlib.h>
 
-#define MAX_TITOLO    256
-#define MAX_AUTORE    128
-#define MAX_GENERE     64
-#define MAX_ISBN       20
-
-typedef struct Libro {
-    int    id;
-    char   titolo[MAX_TITOLO];
-    char   autore[MAX_AUTORE];
-    char   genere[MAX_GENERE];
-    char   isbn[MAX_ISBN];
-    int    anno;
-    int    copie_totali;
-    int    copie_disponibili;
-    int    volte_prestato;   /* per le statistiche */
+typedef struct {
+    int id;
+    char *titolo;
+    char *autore;
+    char *genere;
+    int copie;
 } Libro;
 
-/* catalogo globale */
-extern Libro **catalogo;
-extern int     num_libri;
-extern int     cap_libri;
+void aggiungiLibro(Libro* libri, int *libri_size);
+void modificaLibro(Libro* libri, int *libri_size);
+void eliminaLibro(Libro* libri, int *libri_size);
+Libro* cercaLibro(int id, Libro* libri, int libri_size);
 
-void   libri_init(void);
-void   libri_free(void);
+// Aggiunge un libro alla lista
+// Libri è il puntatore al vettore di libri
+// libr_size è il puntatore al numero di elementi attuali nel vettore
 
-Libro *libro_nuovo(const char *titolo, const char *autore,
-                   const char *genere, const char *isbn,
-                   int anno, int copie);
+void aggiungiLibro(Libro* libri, int *libri_size) {
+    // Implementazione da completare
+}
 
-int    libro_aggiungi(Libro *l);
-int    libro_elimina(int id);
-Libro *libro_cerca_id(int id);
+// Modifica un libro esistente
+// Libri è il puntatore al vettore di libri
+// libr_size è il puntatore al numero di elementi attuali nel vettore
 
-/* ricerca con corrispondenza parziale (strstr) */
-void   libro_cerca_titolo(const char *q);
-void   libro_cerca_autore(const char *q);
-void   libro_cerca_genere(const char *q);
+void modificaLibro(Libro* libri, int *libri_size) {
+    // Implementazione da completare
+}
 
-void   libro_modifica(int id);
-void   libri_stampa_tutti(void);
+// Elimina un libro dalla lista
+// Libri è il puntatore al vettore di libri
+// libr_size è il puntatore al numero di elementi attuali nel vettore
 
-#endif /* LIBRI_H */
+void eliminaLibro(Libro* libri, int *libri_size) {
+    // Implementazione da completare
+}
+
+// Cerca un libro nella lista per ID
+// Libri è il puntatore al vettore di libri
+// libr_size è il numero di elementi attuali nel vettore
+// Ritorna NULL se non trovato, altrimenti il puntatore al libro
+
+Libro* cercaLibro(int id, Libro* libri, int libri_size) {
+    // Implementazione da completare
+}

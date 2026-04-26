@@ -1,61 +1,52 @@
-#ifndef PRESTITI_H
-#define PRESTITI_H
+#include <stdio.h>
+#include <stdlib.h>
 
-#include <time.h>
+typedef struct Libro {
+    int id;
+    char *titolo;
+    char *autore;
+    char *genere;
+    int copie;
+} Libro;
 
-/* Forward declarations */
-struct Libro;
-struct Utente;
-
-#define DURATA_PRESTITO_GIORNI 30
+typedef struct Utente {
+    int id;
+    char *nome;
+    // Lista collegata prestiti
+} Utente;
 
 typedef struct Prestito {
-    int    id;
-    struct Libro  *libro;
-    struct Utente *utente;
-    time_t data_prestito;
-    time_t data_scadenza;
-    int    restituito;      /* 0 = attivo, 1 = restituito */
-    time_t data_restituzione;
+    Libro* libro;
+    Utente* utente;
+    time_t dataPrestito;
+    time_t dataScadenza;
+    char stato[20];
 } Prestito;
 
-/* nodo della lista collegata per i prestiti di un utente */
-typedef struct NodoPrestito {
-    Prestito           *prestito;
-    struct NodoPrestito *next;
-} NodoPrestito;
+void creaPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro, Utente* utente);
+void restituisciPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro);
+void controllaScadenze(Prestito** prestiti, int *prestiti_size);
 
-/* ---------- coda FIFO per le notifiche di scadenza ---------- */
-typedef struct NodoNotifica {
-    char               messaggio[512];
-    struct NodoNotifica *next;
-} NodoNotifica;
+// Crea un nuovo prestito
+// Prestiti è il puntatore al vettore di prestiti
+// prestiti_size è il puntatore al numero di elementi attuali nel vettore
 
-typedef struct CodaNotifiche {
-    NodoNotifica *testa;
-    NodoNotifica *coda;
-    int           dimensione;
-} CodaNotifiche;
+void creaPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro, Utente* utente) {
+    // Implementazione da completare
+}
 
-extern CodaNotifiche notifiche;
+// Restituisce un prestito
+// Prestiti è il puntatore al vettore di prestiti
+// prestiti_size è il puntatore al numero di elementi attuali nel vettore
 
-/* array globale di tutti i prestiti (attivi + storici) */
-extern Prestito **tutti_prestiti;
-extern int        num_prestiti;
-extern int        cap_prestiti;
+void restituisciPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro) {
+    // Implementazione da completare
+}
 
-void     prestiti_init(void);
-void     prestiti_free(void);
+// Controlla scadenze dei prestiti e imposta lo stato in caso necessario
+// Prestiti è il puntatore al vettore di prestiti
+// prestiti_size è il puntatore al numero di elementi attuali nel vettore
 
-Prestito *prestito_nuovo(int libro_id, int utente_id);
-int       prestito_restituisci(int prestito_id);
-void      prestiti_verifica_scadenze(void);
-void      prestiti_stampa_scaduti(void);
-Prestito *prestito_cerca_id(int id);
-
-/* coda notifiche */
-void coda_notifiche_enqueue(const char *msg);
-char *coda_notifiche_dequeue(void); /* restituisce stringa allocata, caller deve free() */
-int   coda_notifiche_vuota(void);
-
-#endif /* PRESTITI_H */
+void controllaScadenze(Prestito** prestiti, int *prestiti_size) {
+    // Implementazione da completare
+}
