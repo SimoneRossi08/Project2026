@@ -1,27 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct{
+typedef struct Libro {
     int id;
     char *titolo;
     char *autore;
     char *genere;
     int copie;
-}Libro;
+} Libro;
 
-typedef struct{
+typedef struct Utente {
     int id;
     char *nome;
     // Lista collegata prestiti
-}Utente;
+} Utente;
 
-typedef struct{
+typedef struct Prestito {
     Libro* libro;
     Utente* utente;
-    int dataPrestito;
-    int dataScadenza;
+    time_t dataPrestito;
+    time_t dataScadenza;
     char stato[20];
-}Prestito;
+} Prestito;
 
 void creaPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro, Utente* utente);
 void restituisciPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro);

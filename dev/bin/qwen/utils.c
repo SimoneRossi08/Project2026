@@ -1,14 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../lib/books.h"
-#include "../lib/users.h"
-#include "../lib/lending.h"
-#include "../lib/InputOutput.h"
-#include "../lib/utilis.h"
-
-#define MAX_LIBRI 100
-#define MAX_UTENTI 100
-#define MAX_PRESTITI 100
 
 void bubbleSort(Libro* libri, int size) {
     for (int i = 0; i < size - 1; i++) {

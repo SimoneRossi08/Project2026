@@ -1,14 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../lib/books.h"
-#include "../lib/users.h"
-#include "../lib/lending.h"
-#include "../lib/InputOutput.h"
-#include "../lib/utilis.h"
-
-#define MAX_LIBRI 100
-#define MAX_UTENTI 100
-#define MAX_PRESTITI 100
 
 void creaPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro, Utente* utente) {
     if (*prestiti_size == MAX_PRESTITI) {

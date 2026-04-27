@@ -1,14 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../lib/books.h"
-#include "../lib/users.h"
-#include "../lib/lending.h"
-#include "../lib/InputOutput.h"
-#include "../lib/utilis.h"
-
-#define MAX_LIBRI 100
-#define MAX_UTENTI 100
-#define MAX_PRESTITI 100
 
 void caricaLibriCSV(Libro* libri, int *libri_size) {
     FILE* fp = fopen("data/libri.csv", "r");
@@ -25,13 +16,7 @@ void caricaLibriCSV(Libro* libri, int *libri_size) {
 
         sscanf(line, "%d,%[^,\n],%[^,\n],%[^,\n],%d", &id, titolo, autore, genere, &copie);
 
-        Libro new_libro;
-        new_libro.id = id;
-        new_libro.titolo = strdup(titolo);
-        new_libro.autore = strdup(autore);
-        new_libro.genere = strdup(genere);
-        new_libro.copie = copie;
-        
+        Libro new_libro = {id, strdup(titolo), strdup(autore), strdup(genere), copie};
         libri[*libri_size] = new_libro;
         (*libri_size)++;
     }
