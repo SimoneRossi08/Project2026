@@ -10,15 +10,15 @@
 #define MAX_UTENTI 100
 #define MAX_PRESTITI 100
 
-void caricaLibriCSV(Libro* libri, int *libri_size) {
-    FILE* fp = fopen("data/libri.csv", "r");
-    if (fp == NULL) {
-        printf("Errore: non riesco a aprire il file 'libri.csv'.\n");
+void caricaLibriCSV(Libro* libri, int *libri_size){
+    FILE* fp = fopen("data/books.csv", "r");
+    if(fp == NULL){
+        printf("Errore: non riesco a aprire il file 'books.csv'.\n");
         return;
     }
 
     char line[256];
-    while (fgets(line, sizeof(line), fp)) {
+    while (fgets(line, sizeof(line), fp)){
         int id;
         char titolo[100], autore[100], genere[100];
         int copie;
@@ -39,21 +39,23 @@ void caricaLibriCSV(Libro* libri, int *libri_size) {
     fclose(fp);
 }
 
-void caricaUtentiCSV(Utente* utenti, int *utenti_size) {
-    FILE* fp = fopen("data/utenti.csv", "r");
-    if (fp == NULL) {
-        printf("Errore: non riesco a aprire il file 'utenti.csv'.\n");
+void caricaUtentiCSV(Utente* utenti, int *utenti_size){
+    FILE* fp = fopen("data/users.csv", "r");
+    if(fp == NULL){
+        printf("Errore: non riesco a aprire il file 'users.csv'.\n");
         return;
     }
 
     char line[256];
-    while (fgets(line, sizeof(line), fp)) {
+    while(fgets(line, sizeof(line), fp)){
         int id;
         char nome[100];
 
-        sscanf(line, "%d,%[^,\n]", &id, nome);
+        scanf(line, "%d,%[^,\n]", &id, nome);
 
-        Utente new_utente = {id, strdup(nome)};
+        Utente new_utente;
+        new_utente.id = id;
+        new_utente.nome = strdup(nome);
         utenti[*utenti_size] = new_utente;
         (*utenti_size)++;
     }
@@ -61,36 +63,35 @@ void caricaUtentiCSV(Utente* utenti, int *utenti_size) {
     fclose(fp);
 }
 
-void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size) {
-    FILE* fp = fopen("data/prestiti.csv", "r");
+void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size){
+    FILE* fp = fopen("data/lending.csv", "r");
     if (fp == NULL) {
-        printf("Errore: non riesco a aprire il file 'prestiti.csv'.\n");
+        printf("Errore: non riesco a aprire il file 'lending.csv'.\n");
         return;
     }
 
     char line[256];
-    while (fgets(line, sizeof(line), fp)) {
+    while (fgets(line, sizeof(line), fp)){
         int idLibro, idUtente;
         char dataPrestito[10], dataScadenza[10], stato[20];
 
         sscanf(line, "%d,%d,%[^,\n],%[^,\n],%[^,\n],%s", &idLibro, &idUtente, dataPrestito, dataScadenza, stato);
 
-        Libro* found_libro = cercaLibro(idLibro, *prestiti, *prestiti_size);
-        Utente* found_utente = NULL;
-        for (int i = 0; i < (*prestiti_size) && found_utente == NULL; i++) {
+        Libro* trovatoLib = cercaLibro(idLibro, *prestiti, *prestiti_size);
+        Utente* trovatoUser = NULL;
+        for (int i = 0; i < (*prestiti_size) && trovatoUser == NULL; i++){
             if (prestiti[i].utente->id == idUtente) {
-                found_utente = prestiti[i].utente;
+                trovatoUser = prestiti[i].utente;
             }
         }
 
-        if (found_libro && found_utente) {
-            Prestito new_prestito = {
-                .libro = found_libro,
-                .utente = found_utente,
-                .dataPrestito = time(NULL),
-                .dataScadenza = time(NULL) + (24 * 60 * 60), // Simula una scadenza di un giorno
-                .stato[0] = '\0'
-            };
+        if (trovatoLib && trovatoUser){
+            Prestito new_prestito;
+            new_prestito.libro = trovatoLib;
+            new_prestito.utente = trovatoUser;
+            new_prestito.dataPrestito = time(NULL);
+            new_prestito.dataScadenza = time(NULL) + (24 * 60 * 60); // Simula una scadenza di un giorno
+            new_prestito.stato[0] = '\0';
 
             strcpy(new_prestito.stato, stato);
 
@@ -98,6 +99,5 @@ void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size) {
             (*prestiti_size)++;
         }
     }
-
     fclose(fp);
 }

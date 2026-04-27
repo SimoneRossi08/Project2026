@@ -10,12 +10,10 @@
 #define MAX_UTENTI 100
 #define MAX_PRESTITI 100
 
-void registraUtente(Utente *utenti, int *utenti_size)
-{
-  if (*utenti_size == MAX_UTENTI)
-  {
-    printf("Errore: numero massimo di utenti raggiunto.\n");
-    return;
+void registraUtente(Utente *utenti, int *utenti_size){
+  if (*utenti_size == MAX_UTENTI){
+      printf("Errore: numero massimo di utenti raggiunto.\n");
+      return;
   }
 
   Utente new_utente;
@@ -28,56 +26,43 @@ void registraUtente(Utente *utenti, int *utenti_size)
   (*utenti_size)++;
 }
 
-void eliminaUtente(Utente *utenti, int *utenti_size)
-{
-  if (*utenti_size == 0)
-  {
+void eliminaUtente(Utente *utenti, int *utenti_size){
+  if(*utenti_size == 0){
     printf("Errore: nessun utente da eliminare.\n");
     return;
   }
 
-  int id;
+  int id, j;
   printf("Inserisci ID dell'utente da eliminare: ");
   scanf("%d", &id);
 
-  Utente *found_utente = NULL;
-  for (int i = 0; i < *utenti_size && found_utente == NULL; i++)
-  {
-    if (utenti[i].id == id)
-    {
-      found_utente = &utenti[i];
+  Utente *trovato = NULL;
+  for(int i = 0; i < *utenti_size && trovato == NULL; i++){
+    if(utenti[i].id == id){
+      trovato = &utenti[i];
     }
   }
 
-  if (found_utente)
-  {
+  if(trovato){
     // Elimina l'utente dalla posizione corrispondente
-    for (int j = 0; j < (*utenti_size) - 1 && utenti[j].id != id; j++)
-      ;
-    if (j == (*utenti_size) - 1)
-    {
+    for(j = 0; j < (*utenti_size) - 1 && utenti[j].id != id; j++);
+    if(j == (*utenti_size) - 1){
       printf("Utente non trovato.\n");
     }
-    else
-    {
+    else{
       *utenti_size = *utenti_size - 1;
-      // Shift to the left to maintain order
-      for (int k = j; k < *utenti_size; k++)
-      {
+      for (int k = j; k < *utenti_size; k++){
         utenti[k] = utenti[k + 1];
       }
     }
   }
-  else
-  {
+  else{
     printf("Utente non trovato.\n");
   }
 }
 
-void stampaUtenti(Utente *utenti, int utenti_size)
-{
-  for (int i = 0; i < utenti_size; i++)
-  {
+void stampaUtenti(Utente *utenti, int utenti_size){
+  for (int i = 0; i < utenti_size; i++){
     printf("ID: %d, Nome: %s\n", utenti[i].id, utenti[i].nome);
   }
 }

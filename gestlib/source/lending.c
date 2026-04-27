@@ -16,13 +16,12 @@ void creaPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro, Utente*
         return;
     }
 
-    Prestito new_prestito = {
-        .libro = libro,
-        .utente = utente,
-        .dataPrestito = time(NULL),
-        .dataScadenza = time(NULL) + (24 * 60 * 60), // Simula una scadenza di un giorno
-        .stato[0] = '\0'
-    };
+    Prestito new_prestito;
+    new_prestito.libro = libro;
+    new_prestito.utente = utente;
+    new_prestito.dataPrestito = time(NULL);
+    new_prestito.dataScadenza = time(NULL) + (24 * 60 * 60); // Simula una scadenza di un giorno
+    new_prestito.stato[0] = '\0';
 
     strcpy(new_prestito.stato, "attivo");
 
@@ -40,24 +39,24 @@ void restituisciPrestito(Prestito** prestiti, int *prestiti_size) {
     printf("Inserisci ID del libro da restituire: ");
     scanf("%d", &idLibro);
 
-    Prestito* found_prestito = NULL;
-    for (int i = 0; i < *prestiti_size && found_prestito == NULL; i++) {
-        if (prestiti[i].libro->id == idLibro) {
-            found_prestito = &prestiti[i];
+    Prestito* trovato = NULL;
+    for (int i = 0; i < *prestiti_size && trovato == NULL; i++) {
+        if(prestiti[i].libro->id == idLibro) {
+            trovato = &prestiti[i];
         }
     }
 
-    if (found_prestito) {
-        printf("Libro restituito: %s\n", found_prestito->libro->titolo);
-        strcpy(found_prestito->stato, "concluso");
+    if (trovato) {
+        printf("Libro restituito: %s\n", trovato->libro->titolo);
+        strcpy(trovato->stato, "concluso");
     } else {
         printf("Prestito non trovato o libro non disponibile.\n");
     }
 }
 
-void controllaScadenze(Prestito** prestiti, int *prestiti_size) {
-    for (int i = 0; i < *prestiti_size; i++) {
-        if (time(NULL) > prestiti[i].dataScadenza && strcmp(prestiti[i].stato, "concluso") == 0) {
+void controllaScadenze(Prestito** prestiti, int *prestiti_size){
+    for(int i = 0; i < *prestiti_size; i++){
+        if (time(NULL)>prestiti[i].dataScadenza && strcmp(prestiti[i].stato, "concluso") == 0){
             printf("Prestito scaduto: %s\n", prestiti[i].libro->titolo);
             strcpy(prestiti[i].stato, "scaduto");
         }

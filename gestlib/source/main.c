@@ -53,17 +53,15 @@ int main() {
                 eliminaLibro(libri, &libr_size);
                 break;
             case 4:
-                {
-                    int id;
-                    printf("Inserisci ID del libro: ");
-                    scanf("%d", &id);
-                    Libro* found_lib = cercaLibro(id, libri, libr_size);
-                    if (found_lib) {
-                        printf("Trovato il libro:\n");
-                        // Stampa i dettagli del libro
-                    } else {
-                        printf("Libro non trovato.\n");
-                    }
+                int id;
+                printf("Inserisci ID del libro: ");
+                scanf("%d", &id);
+                Libro* found_lib = cercaLibro(id, libri, libr_size);
+                if (found_lib){
+                    printf("Trovato il libro:\n");
+                    // Stampa i dettagli del libro
+                } else{
+                    printf("Libro non trovato.\n");
                 }
                 break;
             case 5:
@@ -114,7 +112,7 @@ int main() {
             default:
                 printf("Scelta non valida. Riprova.\n");
         }
-    } while (choice != 12);
+    }while (choice != 12);
 
     // Salva i dati nel CSV
     caricaLibriCSV(libri, &libr_size);
