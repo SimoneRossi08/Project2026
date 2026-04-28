@@ -16,22 +16,16 @@ void stampaUtenti(Utente* utenti, int utenti_size);
 // Utenti è il puntatore al vettore di utenti
 // utenti_size è il puntatore al numero di elementi attuali nel vettore
 
-void registraUtente(Utente* utenti, int *utenti_size) {
-    // Implementazione da completare
-}
+void registraUtente(Utente* utenti, int *utenti_size);
 
 // Elimina un utente dalla lista e rimuove prestiti associati
 // Utenti è il puntatore al vettore di utenti
 // utenti_size è il puntatore al numero di elementi attuali nel vettore
 
-void eliminaUtente(Utente* utenti, int *utenti_size) {
-    // Implementazione da completare
-}
+void eliminaUtente(Utente* utenti, int *utenti_size);
 
 // Stampa tutti gli utenti
 // Utenti è il puntatore al vettore di utenti
 // utenti_size è il numero di elementi attuali nel vettore
 
-void stampaUtenti(Utente* utenti, int utenti_size) {
-    // Implementazione da completare
-}
+void stampaUtenti(Utente* utenti, int utenti_size);

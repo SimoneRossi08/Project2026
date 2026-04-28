@@ -8,14 +8,10 @@ void statistiche(Libro* libri, int *libri_size);
 // Libri è il puntatore al vettore di libri
 // size è il numero di elementi nel vettore
 
-void bubbleSort(Libro* libri, int size) {
-    // Implementazione da completare
-}
+void bubbleSort(Libro* libri, int size);
 
 // Calcola statistiche su tutti i libri (es. quantità totale di copie)
 // Libri è il puntatore al vettore di libri
 // libr_size è il numero di elementi nel vettore
 
-void statistiche(Libro* libri, int *libri_size) {
-    // Implementazione da completare
-}
+void statistiche(Libro* libri, int *libri_size);

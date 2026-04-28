@@ -31,22 +31,16 @@ void controllaScadenze(Prestito** prestiti, int *prestiti_size);
 // Prestiti è il puntatore al vettore di prestiti
 // prestiti_size è il puntatore al numero di elementi attuali nel vettore
 
-void creaPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro, Utente* utente) {
-    // Implementazione da completare
-}
+void creaPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro, Utente* utente);
 
 // Restituisce un prestito
 // Prestiti è il puntatore al vettore di prestiti
 // prestiti_size è il puntatore al numero di elementi attuali nel vettore
 
-void restituisciPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro) {
-    // Implementazione da completare
-}
+void restituisciPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro);
 
 // Controlla scadenze dei prestiti e imposta lo stato in caso necessario
 // Prestiti è il puntatore al vettore di prestiti
 // prestiti_size è il puntatore al numero di elementi attuali nel vettore
 
-void controllaScadenze(Prestito** prestiti, int *prestiti_size) {
-    // Implementazione da completare
-}
+void controllaScadenze(Prestito** prestiti, int *prestiti_size);
