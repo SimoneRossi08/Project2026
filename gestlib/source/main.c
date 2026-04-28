@@ -25,7 +25,7 @@ int main() {
     caricaUtentiCSV(utenti, &utenti_size);
     caricaPrestitiCSV(&prestiti, &prestiti_size);
 
-    int choice;
+    int opt;
     do {
         printf("Menu:\n");
         printf("(1) Aggiungi Libro\n");
@@ -40,9 +40,9 @@ int main() {
         printf("(10) Controlla Scadenze\n");
         printf("(11) Statistiche Libri\n");
         printf("(12) Esci\n");
-        scanf("%d", &choice);
+        scanf("%d", &opt);
 
-        switch (choice) {
+        switch (opt) {
             case 1:
                 aggiungiLibro(libri, &libr_size);
                 break;
@@ -56,8 +56,8 @@ int main() {
                 int id;
                 printf("Inserisci ID del libro: ");
                 scanf("%d", &id);
-                Libro* found_lib = cercaLibro(id, libri, libr_size);
-                if (found_lib){
+                Libro* trovatoLibro = cercaLibro(id, libri, libr_size);
+                if (trovatoLibro){
                     printf("Trovato il libro:\n");
                     // Stampa i dettagli del libro
                 } else{
@@ -81,17 +81,17 @@ int main() {
                     printf("Inserisci ID dell'utente: ");
                     scanf("%d", &idUtente);
 
-                    Libro* found_lib = cercaLibro(idLibro, libri, libr_size);
-                    Utente* found_utente = NULL;
-                    for (int i = 0; i < utenti_size && found_utente == NULL; i++) {
+                    Libro* trovatoLibro = cercaLibro(idLibro, libri, libr_size);
+                    Utente* trovatoUtente = NULL;
+                    for (int i = 0; i < utenti_size && trovatoUtente == NULL; i++) {
                         if (utenti[i].id == idUtente) {
-                            found_utente = &utenti[i];
+                            trovatoUtente = &utenti[i];
                         }
                     }
 
-                    if (found_lib && found_utente) {
-                        creaPrestito(&prestiti, &prestiti_size, found_lib, found_utente);
-                        printf("Préstimo creato.\n");
+                    if (trovatoLibro && trovatoUtente) {
+                        creaPrestito(&prestiti, &prestiti_size, trovatoLibro, trovatoUtente);
+                        printf("Prestito creato.\n");
                     } else {
                         printf("Libro o utente non trovati.\n");
                     }
@@ -112,7 +112,7 @@ int main() {
             default:
                 printf("Scelta non valida. Riprova.\n");
         }
-    }while (choice != 12);
+    }while (opt != 12);
 
     // Salva i dati nel CSV
     caricaLibriCSV(libri, &libr_size);

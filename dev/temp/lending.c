@@ -20,7 +20,7 @@ void creaPrestito(Prestito** prestiti, int *prestiti_size, Libro* libro, Utente*
     new_prestito.libro = libro;
     new_prestito.utente = utente;
     new_prestito.dataPrestito = time(NULL);
-    new_prestito.dataScadenza = time(NULL) + (24 * 60 * 60); // Simula una scadenza di un giorno
+    new_prestito.dataScadenza = time(NULL) + (24 * 60 * 60);
     new_prestito.stato[0] = '\0';
 
     strcpy(new_prestito.stato, "attivo");
