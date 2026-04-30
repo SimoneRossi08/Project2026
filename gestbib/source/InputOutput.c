@@ -23,8 +23,7 @@ void caricaLibriCSV(Libro* libri, int *libri_size){
         char titolo[100], autore[100], genere[100];
         int copie;
 
-        sscanf(line, "%d,%[^,\n],%[^,\n],%[^,\n],%d", &id, titolo, autore, genere, &copie);
-
+    while (scanf("%d,%[^,\n],%[^,\n],%[^,\n],%d", &id, titolo, autore, genere, &copie) == 5) {
         Libro new_libro;
         new_libro.id = id;
         new_libro.titolo = strdup(titolo);
@@ -50,9 +49,8 @@ void caricaUtentiCSV(Utente* utenti, int *utenti_size){
     while(fgets(line, sizeof(line), fp)){
         int id;
         char nome[100];
-
-        scanf(line, "%d,%[^,\n]", &id, nome);
-
+    }
+    while(scanf("%d,%[^,\n]", &id, nome) == 2){
         Utente new_utente;
         new_utente.id = id;
         new_utente.nome = strdup(nome);
@@ -74,13 +72,12 @@ void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size){
     while (fgets(line, sizeof(line), fp)){
         int idLibro, idUtente;
         char dataPrestito[10], dataScadenza[10], stato[20];
-
-        sscanf(line, "%d,%d,%[^,\n],%[^,\n],%[^,\n],%s", &idLibro, &idUtente, dataPrestito, dataScadenza, stato);
-
+    }
+    while (scanf("%d,%d,%[^,\n],%[^,\n],%[^,\n]", &idLibro, &idUtente, dataPrestito, dataScadenza, stato) == 5){
         Libro* trovatoLib = cercaLibro(idLibro, *prestiti, *prestiti_size);
         Utente* trovatoUser = NULL;
-        for (int i = 0; i < (*prestiti_size) && trovatoUser == NULL; i++){
-            if (prestiti[i].utente->id == idUtente) {
+        for(int i = 0; i < (*prestiti_size) && trovatoUser == NULL; i++){
+            if(prestiti[i].utente->id == idUtente){
                 trovatoUser = prestiti[i].utente;
             }
         }

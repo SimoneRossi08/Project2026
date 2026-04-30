@@ -11,6 +11,7 @@ typedef struct{
 void registraUtente(Utente* utenti, int *utenti_size);
 void eliminaUtente(Utente* utenti, int *utenti_size);
 void stampaUtenti(Utente* utenti, int utenti_size);
+Utente* cercaUtente(int id, Utente* utenti, int utenti_size);
 
 // Registra un nuovo utente e aggiunge alla lista
 // Utenti è il puntatore al vettore di utenti

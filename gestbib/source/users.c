@@ -66,3 +66,12 @@ void stampaUtenti(Utente *utenti, int utenti_size){
     printf("ID: %d, Nome: %s\n", utenti[i].id, utenti[i].nome);
   }
 }
+
+Utente* cercaUtente(int id, Utente* utenti, int utenti_size){
+    for(int i = 0; i < utenti_size; i++){
+        if(utenti[i].id == id){
+            return &utenti[i];
+        }
+    }
+    return NULL;
+}
