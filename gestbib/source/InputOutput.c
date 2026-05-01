@@ -86,8 +86,6 @@ void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size){
             Prestito new_prestito;
             new_prestito.libro = trovatoLib;
             new_prestito.utente = trovatoUser;
-            new_prestito.dataPrestito = time(NULL);
-            new_prestito.dataScadenza = time(NULL) + (24 * 60 * 60); // Simula una scadenza di un giorno
             new_prestito.stato[0] = '\0';
 
             strcpy(new_prestito.stato, stato);
