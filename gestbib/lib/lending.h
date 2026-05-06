@@ -12,7 +12,8 @@ typedef struct{
 typedef struct{
     int id;
     char *nome;
-    // Lista collegata prestiti
+    Prestito* prestiti;
+    Utente* next;
 }Utente;
 
 typedef struct{

@@ -43,7 +43,6 @@ Il sistema è organizzato tramite un menu interattivo.
 ### 📚 Gestione libri
 - Aggiunta, modifica, eliminazione  
 - Ricerca per titolo, autore o genere  
-- Supporto a corrispondenze parziali tramite `strstr`
 
 ### 👤 Gestione utenti
 - Registrazione e cancellazione  
@@ -54,7 +53,6 @@ Il sistema è organizzato tramite un menu interattivo.
 - Creazione prestiti (con controllo copie disponibili)  
 - Restituzione libri  
 - Lista prestiti scaduti  
-- Calcolo scadenza: data attuale + 30 giorni (tramite `<time.h>`)
 
 ### 📊 Statistiche
 - Libro più prestato  
