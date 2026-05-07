@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "../lib/books.h"
 #include "../lib/users.h"
 #include "../lib/lending.h"
@@ -23,8 +24,8 @@ void caricaLibriCSV(Libro* libri, int *libri_size){
         char titolo[100], autore[100], genere[100];
         int copie;
     }
-    while(scanf("%d,%[^,\n],%[^,\n],%[^,\n],%d", &id, titolo, autore, genere, &copie)==5){
-        Libro new_libro;
+    sscanf(line, "%d,%[^,\n],%[^,\n],%[^,\n],%d", &id, titolo, autore, genere, &copie);
+
         new_libro.id=id;
         new_libro.titolo=strdup(titolo);
         new_libro.autore=strdup(autore);
@@ -86,6 +87,8 @@ void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size){
             Prestito new_prestito;
             new_prestito.libro=trovatoLib;
             new_prestito.utente=trovatoUser;
+            new_prestito.dataPrestito = time(NULL);
+            new_prestito.dataScadenza = time(NULL) + (24 * 60 * 60); // Simula una scadenza di un giorno
             new_prestito.stato[0]='\0';
 
             strcpy(new_prestito.stato, stato);

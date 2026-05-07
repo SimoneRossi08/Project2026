@@ -98,7 +98,7 @@ int main() {
                 }
                 break;
             case 9:
-                restituisciPrestito(&prestiti, &prestiti_size);
+                restituisciPrestito(&prestiti, &prestiti_size, libri); // Passa il libro corretto se necessario
                 break;
             case 10:
                 controllaScadenze(&prestiti, &prestiti_size);

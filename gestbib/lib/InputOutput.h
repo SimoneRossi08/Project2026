@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void caricaLibriCSV(Libro* libri, int *libri_size);
 void caricaUtentiCSV(Utente* utenti, int *utenti_size);

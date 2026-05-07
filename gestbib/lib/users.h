@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../lib/lending.h"
 
-typedef struct{
+typedef struct Utente{
     int id;
     char *nome;
-    // Lista collegata prestiti da completare
-
-} Utente;
+    Prestito* prestiti;
+    Utente* next;
+}Utente;
 
 void registraUtente(Utente* utenti, int *utenti_size);
 void eliminaUtente(Utente* utenti, int *utenti_size);

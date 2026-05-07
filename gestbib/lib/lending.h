@@ -1,22 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../lib/books.h"
+#include "../lib/users.h"
 
-typedef struct{
-    int id;
-    char *titolo;
-    char *autore;
-    char *genere;
-    int copie;
-}Libro;
-
-typedef struct{
-    int id;
-    char *nome;
-    Prestito* prestiti;
-    Utente* next;
-}Utente;
-
-typedef struct{
+typedef struct Prestito{
     Libro* libro;
     Utente* utente;
     int dataPrestito;

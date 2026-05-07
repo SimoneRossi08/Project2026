@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../lib/books.h"
 
 void bubbleSort(Libro* libri, int size);
 void statistiche(Libro* libri, int *libri_size);
