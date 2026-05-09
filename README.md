@@ -1,5 +1,4 @@
-# 📚 GestBib — Sistema di Gestione Biblioteca
-
+# 📚 GestBib Fork - Ambiente Sperimentale
 ## 📖 Descrizione del progetto
 **GestBib** è un gestionale da riga di comando sviluppato in C che simula il sistema informatico di una biblioteca pubblica.  
 Permette di gestire il catalogo dei libri, gli utenti iscritti e i prestiti attivi.
