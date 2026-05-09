@@ -1,12 +1,20 @@
+#ifndef INPUTOUTPUT_H
+#define INPUTOUTPUT_H
+
 #include <stdio.h>
 #include <stdlib.h>
+#include "books.h"
+#include "users.h"
+#include "lending.h"
 
 void caricaLibriCSV(Libro* libri, int *libri_size);
 void caricaUtentiCSV(Utente* utenti, int *utenti_size);
-void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size);
+void caricaPrestitiCSV(Prestito* prestiti, int *prestiti_size,
+                       Libro* libri, int libri_size,
+                       Utente* utenti, int utenti_size);
 
-// Carica dati dai file CSV e popola i vettori di libri, utenti e prestiti
+void salvaLibriCSV(Libro* libri, int libri_size);
+void salvaUtentiCSV(Utente* utenti, int utenti_size);
+void salvaPrestitiCSV(Prestito* prestiti, int prestiti_size);
 
-void caricaLibriCSV(Libro* libri, int *libri_size);
-void caricaUtentiCSV(Utente* utenti, int *utenti_size);
-void caricaPrestitiCSV(Prestito** prestiti, int *prestiti_size);
+#endif

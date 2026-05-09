@@ -1,18 +1,15 @@
+#ifndef UTILIS_H
+#define UTILIS_H
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "../lib/books.h"
+#include <string.h>
+#include "books.h"
 
-void bubbleSort(Libro* libri, int size);
-void statistiche(Libro* libri, int *libri_size);
-
-// Ordina i libri usando il metodo di bollettino
-// Libri è il puntatore al vettore di libri
-// size è il numero di elementi nel vettore
-
+// Ordina i libri per titolo con bubble sort
 void bubbleSort(Libro* libri, int size);
 
-// Calcola statistiche su tutti i libri (es. quantità totale di copie)
-// Libri è il puntatore al vettore di libri
-// libr_size è il numero di elementi nel vettore
-
+// Stampa statistiche (totale copie disponibili)
 void statistiche(Libro* libri, int *libri_size);
+
+#endif

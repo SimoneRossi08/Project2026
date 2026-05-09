@@ -1,33 +1,24 @@
+#ifndef USERS_H
+#define USERS_H
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "../lib/lending.h"
 
-typedef struct Utente{
+typedef struct Utente {
     int id;
-    char *nome;
-    Prestito* prestiti;
-    Utente* next;
-}Utente;
+    char nome[100];
+} Utente;
 
-void registraUtente(Utente* utenti, int *utenti_size);
-void eliminaUtente(Utente* utenti, int *utenti_size);
-void stampaUtenti(Utente* utenti, int utenti_size);
-Utente* cercaUtente(int id, Utente* utenti, int utenti_size);
-
-// Registra un nuovo utente e aggiunge alla lista
-// Utenti è il puntatore al vettore di utenti
-// utenti_size è il puntatore al numero di elementi attuali nel vettore
-
+// Registra un nuovo utente
 void registraUtente(Utente* utenti, int *utenti_size);
 
-// Elimina un utente dalla lista e rimuove prestiti associati
-// Utenti è il puntatore al vettore di utenti
-// utenti_size è il puntatore al numero di elementi attuali nel vettore
-
+// Elimina un utente dalla lista
 void eliminaUtente(Utente* utenti, int *utenti_size);
 
 // Stampa tutti gli utenti
-// Utenti è il puntatore al vettore di utenti
-// utenti_size è il numero di elementi attuali nel vettore
-
 void stampaUtenti(Utente* utenti, int utenti_size);
+
+// Cerca un utente per ID, ritorna NULL se non trovato
+Utente* cercaUtente(int id, Utente* utenti, int utenti_size);
+
+#endif
