@@ -1,40 +1,34 @@
+#ifndef BOOKS_H
+#define BOOKS_H
+
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Libro{
+typedef struct Libro {
     int id;
-    char *titolo;
-    char *autore;
-    char *genere;
+    char titolo[100];
+    char autore[100];
+    char genere[100];
     int copie;
-}Libro;
+    int volte_prestato;
+} Libro;
 
-void aggiungiLibro(Libro* libri, int *libri_size);
-void modificaLibro(Libro* libri, int *libri_size);
-void eliminaLibro(Libro* libri, int *libri_size);
-Libro* cercaLibro(int id, Libro* libri, int libri_size);
+typedef struct Catalogo {
+    Libro** libri;
+    int size;
+    int capacity;
+    int next_id;
+} Catalogo;
 
-// Aggiunge un libro alla lista
-// Libri è il puntatore al vettore di libri
-// libr_size è il puntatore al numero di elementi attuali nel vettore
+struct Anagrafica;
 
-void aggiungiLibro(Libro* libri, int *libri_size);
+void inizializzaCatalogo(Catalogo* catalogo);
+void liberaCatalogo(Catalogo* catalogo);
+void aggiungiLibro(Catalogo* catalogo);
+void modificaLibro(Catalogo* catalogo);
+void eliminaLibro(Catalogo* catalogo, struct Anagrafica* anagrafica);
+void cercaLibri(Catalogo* catalogo);
+Libro* trovaLibroPerId(Catalogo* catalogo, int id);
+void inserisciLibro(Catalogo* catalogo, Libro* libro);
 
-// Modifica un libro esistente
-// Libri è il puntatore al vettore di libri
-// libr_size è il puntatore al numero di elementi attuali nel vettore
-
-void modificaLibro(Libro* libri, int *libri_size);
-
-// Elimina un libro dalla lista
-// Libri è il puntatore al vettore di libri
-// libr_size è il puntatore al numero di elementi attuali nel vettore
-
-void eliminaLibro(Libro* libri, int *libri_size);
-
-// Cerca un libro nella lista per ID
-// Libri è il puntatore al vettore di libri
-// libr_size è il numero di elementi attuali nel vettore
-// Ritorna NULL se non trovato, altrimenti il puntatore al libro
-
-Libro* cercaLibro(int id, Libro* libri, int libri_size);
+#endif
