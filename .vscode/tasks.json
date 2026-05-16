@@ -7,12 +7,18 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "-Wall",
+                "${workspaceFolder}/gestbib/source/main.c",
+                "${workspaceFolder}/gestbib/source/books.c",
+                "${workspaceFolder}/gestbib/source/users.c",
+                "${workspaceFolder}/gestbib/source/utils.c",
+                "${workspaceFolder}/gestbib/source/lending.c",
+                "${workspaceFolder}/gestbib/source/InputOutput.c",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${workspaceFolder}/gestbib/gestbib"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}/gestbib"
             },
             "problemMatcher": [
                 "$gcc"
@@ -21,7 +27,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Attività generata dal debugger."
+            "detail": "Compila tutti i moduli del progetto GestBib."
         }
     ],
     "version": "2.0.0"
