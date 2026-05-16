@@ -1,3 +1,0 @@
-## Come rilasciare una versione
-
-- Eseguire il commit con il numero della versione (`0.0.0`) seguendo l'ordine numerico.
