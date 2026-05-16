@@ -3,8 +3,8 @@
 #include "../lib/books.h"
 #include "../lib/users.h"
 #include "../lib/lending.h"
-#include "../lib/notifiche.h"
-#include "../lib/statistiche.h"
+#include "../lib/notify.h"
+#include "../lib/utilis.h"
 #include "../lib/InputOutput.h"
 
 int main(void){
