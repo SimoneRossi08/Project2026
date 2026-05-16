@@ -1,4 +1,19 @@
 {
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [
+        {
+            "name": "Debug GestBib",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/gestbib/gestbib",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/gestbib",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "C/C++: gcc compila il file attivo"
+        }
+    ]
 }

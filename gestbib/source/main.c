@@ -41,7 +41,7 @@ int main(void){
         printf("Scelta: ");
         scanf("%d", &opt);
 
-        switch (opt){
+        switch(opt){
             case 1: 
                 aggiungiLibro(&catalogo);
                 break;

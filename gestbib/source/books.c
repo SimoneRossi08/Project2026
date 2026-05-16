@@ -16,14 +16,14 @@ void inizializzaCatalogo(Catalogo* catalogo){
 }
 
 void liberaCatalogo(Catalogo* catalogo){
-    for (int i=0; i<catalogo->size; i++){
+    for(int i=0; i<catalogo->size; i++){
         free(catalogo->libri[i]);
     }
     free(catalogo->libri);
 }
 
 void inserisciLibro(Catalogo* catalogo, Libro* libro){
-    if (catalogo->size>=catalogo->capacity){
+    if(catalogo->size>=catalogo->capacity){
         catalogo->capacity=catalogo->capacity * 2;
         catalogo->libri=(Libro**)realloc(catalogo->libri, sizeof(Libro*) * catalogo->capacity);
     }
@@ -84,7 +84,7 @@ void modificaLibro(Catalogo* catalogo){
 }
 
 void eliminaLibro(Catalogo* catalogo, struct Anagrafica* anag){
-    if (catalogo->size==0){
+    if(catalogo->size==0){
         printf("Nessun libro presente.\n");
         return;
     }
@@ -94,13 +94,13 @@ void eliminaLibro(Catalogo* catalogo, struct Anagrafica* anag){
     scanf("%d", &id);
 
     int posizione=-1;
-    for (int i=0; i<catalogo->size; i++){
+    for(int i=0; i<catalogo->size; i++){
         if (catalogo->libri[i]->id==id){
             posizione=i;
             break;
         }
     }
-    if (posizione==-1){
+    if(posizione==-1){
         printf("Libro non trovato.\n");
         return;
     }
@@ -109,7 +109,7 @@ void eliminaLibro(Catalogo* catalogo, struct Anagrafica* anag){
 
     Anagrafica* anagrafica=(Anagrafica*)anag;
     int prestitoAttivo=0;
-    for (int i=0; i<anagrafica->size; i++){
+    for(int i=0; i<anagrafica->size; i++){
         NodoPrestito* current=anagrafica->utenti[i]->prestiti;
         while (current!=NULL){
             if (current->prestito->libro==libro){
@@ -119,13 +119,13 @@ void eliminaLibro(Catalogo* catalogo, struct Anagrafica* anag){
         }
     }
 
-    if (prestitoAttivo){
+    if(prestitoAttivo){
         printf("Errore: ci sono prestiti attivi per questo libro.\n");
         return;
     }
 
     free(libro);
-    for (int j=posizione; j<catalogo->size - 1; j++){
+    for(int j=posizione; j<catalogo->size - 1; j++){
         catalogo->libri[j]=catalogo->libri[j + 1];
     }
     catalogo->size--;
@@ -135,7 +135,7 @@ void eliminaLibro(Catalogo* catalogo, struct Anagrafica* anag){
 }
 
 void cercaLibri(Catalogo* catalogo){
-    if (catalogo->size==0){
+    if(catalogo->size==0){
         printf("Catalogo vuoto.\n");
         return;
     }
@@ -145,7 +145,7 @@ void cercaLibri(Catalogo* catalogo){
     scanf(" %[^\n]", query);
 
     int trovati=0;
-    for (int i=0; i<catalogo->size; i++){
+    for(int i=0; i<catalogo->size; i++){
         Libro* libro=catalogo->libri[i];
         if (strstr(libro->titolo, query)!=NULL ||
             strstr(libro->autore, query)!=NULL ||
@@ -156,13 +156,13 @@ void cercaLibri(Catalogo* catalogo){
             trovati++;
         }
     }
-    if (trovati==0){
+    if(trovati==0){
         printf("Nessun libro corrisponde a \"%s\".\n", query);
     }
 }
 
 Libro* trovaLibroPerId(Catalogo* catalogo, int id){
-    for (int i=0; i<catalogo->size; i++){
+    for(int i=0; i<catalogo->size; i++){
         if (catalogo->libri[i]->id==id){
             return catalogo->libri[i];
         }

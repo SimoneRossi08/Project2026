@@ -17,11 +17,11 @@ void creaPrestito(Catalogo* catalogo, Anagrafica* anagrafica){
     Libro* libro=trovaLibroPerId(catalogo, idLibro);
     Utente* utente=trovaUtentePerId(anagrafica, idUtente);
 
-    if (libro==NULL || utente==NULL){
+    if(libro==NULL || utente==NULL){
         printf("Libro o utente non trovati.\n");
         return;
     }
-    if (libro->copie<=0){
+    if(libro->copie<=0){
         printf("Errore: nessuna copia disponibile.\n");
         return;
     }
@@ -55,21 +55,21 @@ void restituisciPrestito(Catalogo* catalogo, Anagrafica* anagrafica){
     scanf("%d", &idUtente);
 
     Utente* utente=trovaUtentePerId(anagrafica, idUtente);
-    if (utente==NULL){
+    if(utente==NULL){
         printf("Utente non trovato.\n");
         return;
     }
 
     Prestito* prestito=NULL;
     NodoPrestito* current=utente->prestiti;
-    while (current!=NULL){
-        if (current->prestito->libro->id==idLibro){
+    while(current!=NULL){
+        if(current->prestito->libro->id==idLibro){
             prestito=current->prestito;
             break;
         }
         current=current->next;
     }
-    if (prestito==NULL){
+    if(prestito==NULL){
         printf("Prestito non trovato per quell'utente.\n");
         return;
     }
@@ -90,7 +90,7 @@ void mostraScaduti(Anagrafica* anagrafica){
     time_t adesso=time(NULL);
     int trovati=0;
 
-    for (int i=0; i<anagrafica->size; i++){
+    for(int i=0; i<anagrafica->size; i++){
         Utente* utente=anagrafica->utenti[i];
         NodoPrestito* current=utente->prestiti;
         while (current!=NULL){
@@ -106,7 +106,7 @@ void mostraScaduti(Anagrafica* anagrafica){
         }
     }
 
-    if (trovati==0){
+    if(trovati==0){
         printf("Nessun prestito scaduto.\n");
     }
 }

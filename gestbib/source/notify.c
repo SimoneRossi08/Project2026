@@ -13,7 +13,7 @@ void inserisciNotifica(CodaNotifiche* coda, const char* messaggio){
     strcpy(nuovoNodo->messaggio, messaggio);
     nuovoNodo->next=NULL;
 
-    if (coda->testa==NULL){
+    if(coda->testa==NULL){
         coda->testa=nuovoNodo;
         coda->coda=nuovoNodo;
     }else{
@@ -23,14 +23,14 @@ void inserisciNotifica(CodaNotifiche* coda, const char* messaggio){
 }
 
 void mostraNotifiche(CodaNotifiche* coda){
-    if (coda->testa==NULL){
+    if(coda->testa==NULL){
         printf("Nessuna notifica.\n");
         return;
     }
 
     printf("\n=== Notifiche ===\n");
     NodoNotifica* current=coda->testa;
-    while (current!=NULL){
+    while(current!=NULL){
         printf("- %s\n", current->messaggio);
         NodoNotifica* temp=current;
         current=current->next;
@@ -43,7 +43,7 @@ void mostraNotifiche(CodaNotifiche* coda){
 
 void liberaCoda(CodaNotifiche* coda){
     NodoNotifica* current=coda->testa;
-    while (current!=NULL){
+    while(current!=NULL){
         NodoNotifica* temp=current;
         current=current->next;
         free(temp);
