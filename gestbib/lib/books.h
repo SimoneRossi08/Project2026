@@ -4,21 +4,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Libro {
+typedef struct Libro{
     int id;
     char titolo[100];
     char autore[100];
     char genere[100];
     int copie;
     int volte_prestato;
-} Libro;
+}Libro;
 
-typedef struct Catalogo {
+typedef struct Catalogo{
     Libro** libri;
     int size;
     int capacity;
     int next_id;
-} Catalogo;
+}Catalogo;
 
 struct Anagrafica;
 

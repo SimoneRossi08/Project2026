@@ -18,7 +18,7 @@ Ogni nodo contiene:
 - un puntatore a `struct Prestito`
 - un puntatore `*next` al nodo successivo  
 
-### 📥 Coda (FIFO)
+### 📥 Coda(FIFO)
 Le notifiche di scadenza sono gestite tramite una struttura `CodaNotifiche`.
 
 - I prestiti scaduti generano notifiche inserite in coda  

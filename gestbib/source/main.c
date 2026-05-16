@@ -7,7 +7,7 @@
 #include "../lib/statistiche.h"
 #include "../lib/InputOutput.h"
 
-int main(void) {
+int main(void){
     Catalogo catalogo;
     Anagrafica anagrafica;
     CodaNotifiche coda;
@@ -23,7 +23,7 @@ int main(void) {
     mostraNotifiche(&coda);
 
     int opt;
-    do {
+    do{
         printf("\n=== GestBib ===\n");
         printf("(1)  Aggiungi libro\n");
         printf("(2)  Modifica libro\n");
@@ -41,7 +41,7 @@ int main(void) {
         printf("Scelta: ");
         scanf("%d", &opt);
 
-        switch (opt) {
+        switch(opt){
             case 1:  aggiungiLibro(&catalogo); break;
             case 2:  modificaLibro(&catalogo); break;
             case 3:  eliminaLibro(&catalogo, &anagrafica); break;
@@ -57,7 +57,7 @@ int main(void) {
             case 0:  printf("Uscita.\n"); break;
             default: printf("Scelta non valida.\n");
         }
-    } while (opt != 0);
+    }while(opt!=0);
 
     salvaLibri(&catalogo);
     salvaUtenti(&anagrafica);
