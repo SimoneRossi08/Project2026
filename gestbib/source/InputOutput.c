@@ -151,8 +151,7 @@ void caricaPrestiti(Catalogo* catalogo, Anagrafica* anagrafica, CodaNotifiche* c
                 char data[64];
                 struct tm* tm_info=localtime(&prestito->dataScadenza);
                 strftime(data, sizeof(data), "%Y-%m-%d", tm_info);
-                sprintf(messaggio, "Prestito scaduto il %s: \"%s\"(utente: %s)",
-                        data, libro->titolo, utente->nome);
+                printf("Prestito scaduto il %s: \"%s\" (utente: %s)", data, libro->titolo, utente->nome);
                 inserisciNotifica(coda, messaggio);
             }
         }
