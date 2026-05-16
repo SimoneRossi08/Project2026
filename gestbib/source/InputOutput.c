@@ -7,15 +7,15 @@
 // Estrae il prossimo campo separato da virgola dalla riga.
 // Modifica la riga inserendo terminatori '\0' al posto delle virgole.
 char* prossimoCampo(char** cursore){
-    if(*cursore==NULL){
+    if (*cursore==NULL){
         return NULL;
     }
     char* inizio=*cursore;
     char* p=inizio;
-    while(*p!='\0' && *p!=',' && *p!='\n' && *p!='\r'){
+    while (*p!='\0' && *p!=',' && *p!='\n' && *p!='\r'){
         p++;
     }
-    if(*p!='\0'){
+    if (*p!='\0'){
         *p='\0';
         *cursore=p + 1;
     }else{
@@ -26,14 +26,14 @@ char* prossimoCampo(char** cursore){
 
 void caricaLibri(Catalogo* catalogo){
     FILE* f=fopen("data/books.csv", "r");
-    if(f==NULL){
+    if (f==NULL){
         return;
     }
 
     char riga[512];
     fgets(riga, sizeof(riga), f);
 
-    while(fgets(riga, sizeof(riga), f)!=NULL){
+    while (fgets(riga, sizeof(riga), f)!=NULL){
         char* cursore=riga;
         Libro* libro=(Libro*)malloc(sizeof(Libro));
 
@@ -45,7 +45,7 @@ void caricaLibri(Catalogo* catalogo){
 
         char* campoVP=prossimoCampo(&cursore);
         libro->volte_prestato=0;
-        if(campoVP!=NULL){
+        if (campoVP!=NULL){
             libro->volte_prestato=atoi(campoVP);
         }
 
@@ -57,12 +57,12 @@ void caricaLibri(Catalogo* catalogo){
 
 void salvaLibri(Catalogo* catalogo){
     FILE* f=fopen("data/books.csv", "w");
-    if(f==NULL){
+    if (f==NULL){
         return;
     }
 
     fprintf(f, "id,titolo,autore,genere,copie,volte_prestato\n");
-    for(int i=0; i<catalogo->size; i++){
+    for (int i=0; i<catalogo->size; i++){
         Libro* libro=catalogo->libri[i];
         fprintf(f, "%d,%s,%s,%s,%d,%d\n",
                 libro->id, libro->titolo, libro->autore,
@@ -74,14 +74,14 @@ void salvaLibri(Catalogo* catalogo){
 
 void caricaUtenti(Anagrafica* anagrafica){
     FILE* f=fopen("data/users.csv", "r");
-    if(f==NULL){
+    if (f==NULL){
         return;
     }
 
     char riga[256];
     fgets(riga, sizeof(riga), f);
 
-    while(fgets(riga, sizeof(riga), f)!=NULL){
+    while (fgets(riga, sizeof(riga), f)!=NULL){
         char* cursore=riga;
         Utente* utente=(Utente*)malloc(sizeof(Utente));
 
@@ -90,7 +90,7 @@ void caricaUtenti(Anagrafica* anagrafica){
 
         char* campoSC=prossimoCampo(&cursore);
         utente->storico_count=0;
-        if(campoSC!=NULL){
+        if (campoSC!=NULL){
             utente->storico_count=atoi(campoSC);
         }
 
@@ -103,12 +103,12 @@ void caricaUtenti(Anagrafica* anagrafica){
 
 void salvaUtenti(Anagrafica* anagrafica){
     FILE* f=fopen("data/users.csv", "w");
-    if(f==NULL){
+    if (f==NULL){
         return;
     }
 
     fprintf(f, "id,nome,storico_count\n");
-    for(int i=0; i<anagrafica->size; i++){
+    for (int i=0; i<anagrafica->size; i++){
         Utente* utente=anagrafica->utenti[i];
         fprintf(f, "%d,%s,%d\n", utente->id, utente->nome, utente->storico_count);
     }
@@ -118,7 +118,7 @@ void salvaUtenti(Anagrafica* anagrafica){
 
 void caricaPrestiti(Catalogo* catalogo, Anagrafica* anagrafica, CodaNotifiche* coda){
     FILE* f=fopen("data/lending.csv", "r");
-    if(f==NULL){
+    if (f==NULL){
         return;
     }
 
@@ -127,7 +127,7 @@ void caricaPrestiti(Catalogo* catalogo, Anagrafica* anagrafica, CodaNotifiche* c
 
     time_t adesso=time(NULL);
 
-    while(fgets(riga, sizeof(riga), f)!=NULL){
+    while (fgets(riga, sizeof(riga), f)!=NULL){
         char* cursore=riga;
 
         int idLibro=atoi(prossimoCampo(&cursore));
@@ -138,7 +138,7 @@ void caricaPrestiti(Catalogo* catalogo, Anagrafica* anagrafica, CodaNotifiche* c
         Libro* libro=trovaLibroPerId(catalogo, idLibro);
         Utente* utente=trovaUtentePerId(anagrafica, idUtente);
 
-        if(libro!=NULL && utente!=NULL){
+        if (libro!=NULL && utente!=NULL){
             Prestito* prestito=(Prestito*)malloc(sizeof(Prestito));
             prestito->libro=libro;
             prestito->utente=utente;
@@ -146,12 +146,13 @@ void caricaPrestiti(Catalogo* catalogo, Anagrafica* anagrafica, CodaNotifiche* c
             prestito->dataScadenza=(time_t)dataScadenza;
             inserisciPrestito(utente, prestito);
 
-            if(prestito->dataScadenza<adesso){
+            if (prestito->dataScadenza<adesso){
                 char messaggio[256];
                 char data[64];
                 struct tm* tm_info=localtime(&prestito->dataScadenza);
                 strftime(data, sizeof(data), "%Y-%m-%d", tm_info);
-                printf("Prestito scaduto il %s: \"%s\" (utente: %s)", data, libro->titolo, utente->nome);
+                sprintf(messaggio, "Prestito scaduto il %s: \"%s\" (utente: %s)",
+                        data, libro->titolo, utente->nome);
                 inserisciNotifica(coda, messaggio);
             }
         }
@@ -162,18 +163,18 @@ void caricaPrestiti(Catalogo* catalogo, Anagrafica* anagrafica, CodaNotifiche* c
 
 void salvaPrestiti(Anagrafica* anagrafica){
     FILE* f=fopen("data/lending.csv", "w");
-    if(f==NULL){
+    if (f==NULL){
         return;
     }
 
     fprintf(f, "libro_id,utente_id,data_prestito,data_scadenza\n");
-    for(int i=0; i<anagrafica->size; i++){
+    for (int i=0; i<anagrafica->size; i++){
         NodoPrestito* current=anagrafica->utenti[i]->prestiti;
-        while(current!=NULL){
+        while (current!=NULL){
             Prestito* prestito=current->prestito;
             fprintf(f, "%d,%d,%ld,%ld\n",
                     prestito->libro->id, prestito->utente->id,
-                   (long)prestito->dataPrestito,(long)prestito->dataScadenza);
+                    (long)prestito->dataPrestito, (long)prestito->dataScadenza);
             current=current->next;
         }
     }
@@ -184,28 +185,28 @@ void salvaPrestiti(Anagrafica* anagrafica){
 void aggiungiStorico(Prestito* prestito, time_t dataRestituzione){
     int vuoto=0;
     FILE* verifica=fopen("data/history.csv", "r");
-    if(verifica==NULL){
+    if (verifica==NULL){
         vuoto=1;
     }else{
         fseek(verifica, 0, SEEK_END);
-        if(ftell(verifica)==0){
+        if (ftell(verifica)==0){
             vuoto=1;
         }
         fclose(verifica);
     }
 
     FILE* f=fopen("data/history.csv", "a");
-    if(f==NULL){
+    if (f==NULL){
         return;
     }
 
-    if(vuoto){
+    if (vuoto){
         fprintf(f, "libro_id,utente_id,data_prestito,data_scadenza,data_restituzione\n");
     }
     fprintf(f, "%d,%d,%ld,%ld,%ld\n",
             prestito->libro->id, prestito->utente->id,
-           (long)prestito->dataPrestito,(long)prestito->dataScadenza,
-           (long)dataRestituzione);
+            (long)prestito->dataPrestito, (long)prestito->dataScadenza,
+            (long)dataRestituzione);
 
     fclose(f);
 }

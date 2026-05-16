@@ -16,10 +16,10 @@ void inizializzaAnagrafica(Anagrafica* anagrafica){
 }
 
 void liberaAnagrafica(Anagrafica* anagrafica){
-    for(int i=0; i<anagrafica->size; i++){
+    for (int i=0; i<anagrafica->size; i++){
         Utente* utente=anagrafica->utenti[i];
         NodoPrestito* current=utente->prestiti;
-        while(current!=NULL){
+        while (current!=NULL){
             NodoPrestito* temp=current;
             current=current->next;
             free(temp->prestito);
@@ -31,14 +31,14 @@ void liberaAnagrafica(Anagrafica* anagrafica){
 }
 
 void inserisciUtente(Anagrafica* anagrafica, Utente* utente){
-    if(anagrafica->size>=anagrafica->capacity){
+    if (anagrafica->size>=anagrafica->capacity){
         anagrafica->capacity=anagrafica->capacity * 2;
         anagrafica->utenti=(Utente**)realloc(anagrafica->utenti,
                                                 sizeof(Utente*) * anagrafica->capacity);
     }
     anagrafica->utenti[anagrafica->size]=utente;
     anagrafica->size++;
-    if(utente->id>=anagrafica->next_id){
+    if (utente->id>=anagrafica->next_id){
         anagrafica->next_id=utente->id + 1;
     }
 }
@@ -55,11 +55,11 @@ void registraUtente(Anagrafica* anagrafica){
 
     inserisciUtente(anagrafica, utente);
     salvaUtenti(anagrafica);
-    printf("Utente registrato(ID: %d).\n", utente->id);
+    printf("Utente registrato (ID: %d).\n", utente->id);
 }
 
 void eliminaUtente(Anagrafica* anagrafica){
-    if(anagrafica->size==0){
+    if (anagrafica->size==0){
         printf("Nessun utente presente.\n");
         return;
     }
@@ -69,25 +69,25 @@ void eliminaUtente(Anagrafica* anagrafica){
     scanf("%d", &id);
 
     int posizione=-1;
-    for(int i=0; i<anagrafica->size; i++){
-        if(anagrafica->utenti[i]->id==id){
+    for (int i=0; i<anagrafica->size; i++){
+        if (anagrafica->utenti[i]->id==id){
             posizione=i;
             break;
         }
     }
-    if(posizione==-1){
+    if (posizione==-1){
         printf("Utente non trovato.\n");
         return;
     }
 
     Utente* utente=anagrafica->utenti[posizione];
-    if(utente->prestiti!=NULL){
+    if (utente->prestiti!=NULL){
         printf("Errore: l'utente ha prestiti attivi. Restituiscili prima.\n");
         return;
     }
 
     free(utente);
-    for(int j=posizione; j<anagrafica->size - 1; j++){
+    for (int j=posizione; j<anagrafica->size - 1; j++){
         anagrafica->utenti[j]=anagrafica->utenti[j + 1];
     }
     anagrafica->size--;
@@ -97,16 +97,16 @@ void eliminaUtente(Anagrafica* anagrafica){
 }
 
 void stampaUtenti(Anagrafica* anagrafica){
-    if(anagrafica->size==0){
+    if (anagrafica->size==0){
         printf("Nessun utente registrato.\n");
         return;
     }
 
-    for(int i=0; i<anagrafica->size; i++){
+    for (int i=0; i<anagrafica->size; i++){
         Utente* utente=anagrafica->utenti[i];
         int attivi=0;
         NodoPrestito* current=utente->prestiti;
-        while(current!=NULL){
+        while (current!=NULL){
             attivi++;
             current=current->next;
         }
@@ -121,7 +121,7 @@ void mostraStorico(Anagrafica* anagrafica){
     scanf("%d", &id);
 
     Utente* utente=trovaUtentePerId(anagrafica, id);
-    if(utente==NULL){
+    if (utente==NULL){
         printf("Utente non trovato.\n");
         return;
     }
@@ -129,24 +129,24 @@ void mostraStorico(Anagrafica* anagrafica){
     printf("\n--- Prestiti attivi di %s ---\n", utente->nome);
     NodoPrestito* current=utente->prestiti;
     int n=0;
-    while(current!=NULL){
+    while (current!=NULL){
         Prestito* prestito=current->prestito;
         char data[64];
         struct tm* tm_info=localtime(&prestito->dataScadenza);
         strftime(data, sizeof(data), "%Y-%m-%d", tm_info);
-        printf("  - \"%s\"(scadenza: %s)\n", prestito->libro->titolo, data);
+        printf("  - \"%s\" (scadenza: %s)\n", prestito->libro->titolo, data);
         n++;
         current=current->next;
     }
-    if(n==0){
-        printf(" (nessun prestito attivo)\n");
+    if (n==0){
+        printf("  (nessun prestito attivo)\n");
     }
     printf("Totale prestiti effettuati nel tempo: %d\n", utente->storico_count);
 }
 
 Utente* trovaUtentePerId(Anagrafica* anagrafica, int id){
-    for(int i=0; i<anagrafica->size; i++){
-        if(anagrafica->utenti[i]->id==id){
+    for (int i=0; i<anagrafica->size; i++){
+        if (anagrafica->utenti[i]->id==id){
             return anagrafica->utenti[i];
         }
     }
@@ -161,11 +161,11 @@ void inserisciPrestito(Utente* utente, Prestito* prestito){
 }
 
 void rimuoviPrestito(Utente* utente, Prestito* prestito){
-    if(utente->prestiti==NULL){
+    if (utente->prestiti==NULL){
         return;
     }
 
-    if(utente->prestiti->prestito==prestito){
+    if (utente->prestiti->prestito==prestito){
         NodoPrestito* temp=utente->prestiti;
         utente->prestiti=utente->prestiti->next;
         free(temp);
@@ -173,8 +173,8 @@ void rimuoviPrestito(Utente* utente, Prestito* prestito){
     }
 
     NodoPrestito* current=utente->prestiti;
-    while(current->next!=NULL){
-        if(current->next->prestito==prestito){
+    while (current->next!=NULL){
+        if (current->next->prestito==prestito){
             NodoPrestito* temp=current->next;
             current->next=current->next->next;
             free(temp);

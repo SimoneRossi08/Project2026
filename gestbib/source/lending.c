@@ -7,30 +7,30 @@
 
 #define DURATA_PRESTITO_GIORNI 30
 
-void creaPrestito(Catalogo* catalogo, Anagrafica* anagrafica) {
+void creaPrestito(Catalogo* catalogo, Anagrafica* anagrafica){
     int idLibro, idUtente;
     printf("ID libro: ");
     scanf("%d", &idLibro);
     printf("ID utente: ");
     scanf("%d", &idUtente);
 
-    Libro* libro = trovaLibroPerId(catalogo, idLibro);
-    Utente* utente = trovaUtentePerId(anagrafica, idUtente);
+    Libro* libro=trovaLibroPerId(catalogo, idLibro);
+    Utente* utente=trovaUtentePerId(anagrafica, idUtente);
 
-    if (libro == NULL || utente == NULL) {
+    if (libro==NULL || utente==NULL){
         printf("Libro o utente non trovati.\n");
         return;
     }
-    if (libro->copie <= 0) {
+    if (libro->copie<=0){
         printf("Errore: nessuna copia disponibile.\n");
         return;
     }
 
-    Prestito* prestito = (Prestito*)malloc(sizeof(Prestito));
-    prestito->libro = libro;
-    prestito->utente = utente;
-    prestito->dataPrestito = time(NULL);
-    prestito->dataScadenza = prestito->dataPrestito + DURATA_PRESTITO_GIORNI * 24 * 60 * 60;
+    Prestito* prestito=(Prestito*)malloc(sizeof(Prestito));
+    prestito->libro=libro;
+    prestito->utente=utente;
+    prestito->dataPrestito=time(NULL);
+    prestito->dataScadenza=prestito->dataPrestito + DURATA_PRESTITO_GIORNI * 24 * 60 * 60;
 
     libro->copie--;
     libro->volte_prestato++;
@@ -42,39 +42,39 @@ void creaPrestito(Catalogo* catalogo, Anagrafica* anagrafica) {
     salvaPrestiti(anagrafica);
 
     char data[64];
-    struct tm* tm_info = localtime(&prestito->dataScadenza);
+    struct tm* tm_info=localtime(&prestito->dataScadenza);
     strftime(data, sizeof(data), "%Y-%m-%d", tm_info);
     printf("Prestito creato. Scadenza: %s\n", data);
 }
 
-void restituisciPrestito(Catalogo* catalogo, Anagrafica* anagrafica) {
+void restituisciPrestito(Catalogo* catalogo, Anagrafica* anagrafica){
     int idLibro, idUtente;
     printf("ID libro: ");
     scanf("%d", &idLibro);
     printf("ID utente: ");
     scanf("%d", &idUtente);
 
-    Utente* utente = trovaUtentePerId(anagrafica, idUtente);
-    if (utente == NULL) {
+    Utente* utente=trovaUtentePerId(anagrafica, idUtente);
+    if (utente==NULL){
         printf("Utente non trovato.\n");
         return;
     }
 
-    Prestito* prestito = NULL;
-    NodoPrestito* current = utente->prestiti;
-    while (current != NULL) {
-        if (current->prestito->libro->id == idLibro) {
-            prestito = current->prestito;
+    Prestito* prestito=NULL;
+    NodoPrestito* current=utente->prestiti;
+    while (current!=NULL){
+        if (current->prestito->libro->id==idLibro){
+            prestito=current->prestito;
             break;
         }
-        current = current->next;
+        current=current->next;
     }
-    if (prestito == NULL) {
+    if (prestito==NULL){
         printf("Prestito non trovato per quell'utente.\n");
         return;
     }
 
-    time_t adesso = time(NULL);
+    time_t adesso=time(NULL);
     aggiungiStorico(prestito, adesso);
 
     prestito->libro->copie++;
@@ -86,27 +86,27 @@ void restituisciPrestito(Catalogo* catalogo, Anagrafica* anagrafica) {
     printf("Prestito restituito.\n");
 }
 
-void mostraScaduti(Anagrafica* anagrafica) {
-    time_t adesso = time(NULL);
-    int trovati = 0;
+void mostraScaduti(Anagrafica* anagrafica){
+    time_t adesso=time(NULL);
+    int trovati=0;
 
-    for (int i = 0; i < anagrafica->size; i++) {
-        Utente* utente = anagrafica->utenti[i];
-        NodoPrestito* current = utente->prestiti;
-        while (current != NULL) {
-            if (current->prestito->dataScadenza < adesso) {
+    for (int i=0; i<anagrafica->size; i++){
+        Utente* utente=anagrafica->utenti[i];
+        NodoPrestito* current=utente->prestiti;
+        while (current!=NULL){
+            if (current->prestito->dataScadenza<adesso){
                 char data[64];
-                struct tm* tm_info = localtime(&current->prestito->dataScadenza);
+                struct tm* tm_info=localtime(&current->prestito->dataScadenza);
                 strftime(data, sizeof(data), "%Y-%m-%d", tm_info);
                 printf("SCADUTO: utente %s - libro \"%s\" (scadenza: %s)\n",
                        utente->nome, current->prestito->libro->titolo, data);
                 trovati++;
             }
-            current = current->next;
+            current=current->next;
         }
     }
 
-    if (trovati == 0) {
+    if (trovati==0){
         printf("Nessun prestito scaduto.\n");
     }
 }
