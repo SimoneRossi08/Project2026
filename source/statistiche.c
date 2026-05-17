@@ -8,10 +8,10 @@
 
 void stampaBarra(int valore, int massimo){
     int n=0;
-    if(massimo>0){
+    if(massimo> 0){
         n=valore * BAR_MAX / massimo;
     }
-    if(n==0 && valore>0){
+    if(n==0 && valore> 0){
         n=1;
     }
     for(int i=0; i<n; i++){
@@ -28,13 +28,13 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
     Libro* libroTop=NULL;
     int maxPrestiti=0;
     for(int i=0; i<catalogo->size; i++){
-        if(catalogo->libri[i]->volte_prestato>maxPrestiti){
+        if(catalogo->libri[i]->volte_prestato> maxPrestiti){
             maxPrestiti=catalogo->libri[i]->volte_prestato;
             libroTop=catalogo->libri[i];
         }
     }
     printf("\n--- Libro piu' prestato ---\n");
-    if(libroTop!=NULL && maxPrestiti>0){
+    if(libroTop!=NULL && maxPrestiti> 0){
         printf("\"%s\" - %d prestiti\n", libroTop->titolo, maxPrestiti);
     } else{
         printf("Nessun prestito ancora effettuato.\n");
@@ -43,13 +43,13 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
     Utente* utenteTop=NULL;
     int maxStorico=0;
     for(int i=0; i<anagrafica->size; i++){
-        if(anagrafica->utenti[i]->storico_count>maxStorico){
+        if(anagrafica->utenti[i]->storico_count> maxStorico){
             maxStorico=anagrafica->utenti[i]->storico_count;
             utenteTop=anagrafica->utenti[i];
         }
     }
     printf("\n--- Utente piu' attivo ---\n");
-    if(utenteTop!=NULL && maxStorico>0){
+    if(utenteTop!=NULL && maxStorico> 0){
         printf("%s - %d prestiti totali\n", utenteTop->nome, maxStorico);
     } else{
         printf("Nessun utente ha effettuato prestiti.\n");
@@ -67,7 +67,7 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
     }
     int restituiti=totale - attivi;
     printf("\n--- Tasso di restituzione ---\n");
-    if(totale>0){
+    if(totale> 0){
         int percentuale=restituiti * 100 / totale;
         printf("Restituiti %d/%d(%d%%)\n", restituiti, totale, percentuale);
     } else{
@@ -86,7 +86,7 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
 
     for(int i=0; i<catalogo->size; i++){
         Libro* libro=catalogo->libri[i];
-        if(libro->volte_prestato>0){
+        if(libro->volte_prestato> 0){
             int trovato=-1;
             for(int j=0; j<numGeneri; j++){
                 if(strcmp(generi[j], libro->genere)==0){
@@ -111,7 +111,7 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
 
     int massimo=0;
     for(int i=0; i<numGeneri; i++){
-        if(conteggi[i]>massimo){
+        if(conteggi[i]> massimo){
             massimo=conteggi[i];
         }
     }
