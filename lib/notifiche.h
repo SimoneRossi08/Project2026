@@ -1,5 +1,5 @@
-#ifndef NOTIFY_H
-#define NOTIFY_H
+#ifndef NOTIFICHE_H
+#define NOTIFICHE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,12 +7,12 @@
 typedef struct NodoNotifica{
     char messaggio[256];
     struct NodoNotifica* next;
-}NodoNotifica;
+} NodoNotifica;
 
 typedef struct CodaNotifiche{
     NodoNotifica* testa;
     NodoNotifica* coda;
-}CodaNotifiche;
+} CodaNotifiche;
 
 void inizializzaCoda(CodaNotifiche* coda);
 void inserisciNotifica(CodaNotifiche* coda, const char* messaggio);

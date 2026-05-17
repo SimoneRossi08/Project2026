@@ -9,21 +9,21 @@ struct Prestito;
 typedef struct NodoPrestito{
     struct Prestito* prestito;
     struct NodoPrestito* next;
-}NodoPrestito;
+} NodoPrestito;
 
 typedef struct Utente{
     int id;
     char nome[100];
     NodoPrestito* prestiti;
     int storico_count;
-}Utente;
+} Utente;
 
 typedef struct Anagrafica{
     Utente** utenti;
     int size;
     int capacity;
     int next_id;
-}Anagrafica;
+} Anagrafica;
 
 void inizializzaAnagrafica(Anagrafica* anagrafica);
 void liberaAnagrafica(Anagrafica* anagrafica);

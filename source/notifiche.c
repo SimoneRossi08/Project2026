@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../lib/notify.h"
+#include "../lib/notifiche.h"
 
 void inizializzaCoda(CodaNotifiche* coda){
     coda->testa=NULL;
@@ -16,7 +16,7 @@ void inserisciNotifica(CodaNotifiche* coda, const char* messaggio){
     if(coda->testa==NULL){
         coda->testa=nuovoNodo;
         coda->coda=nuovoNodo;
-    }else{
+    } else{
         coda->coda->next=nuovoNodo;
         coda->coda=nuovoNodo;
     }

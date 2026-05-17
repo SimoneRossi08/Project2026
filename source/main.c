@@ -3,8 +3,8 @@
 #include "../lib/books.h"
 #include "../lib/users.h"
 #include "../lib/lending.h"
-#include "../lib/notify.h"
-#include "../lib/utilis.h"
+#include "../lib/notifiche.h"
+#include "../lib/statistiche.h"
 #include "../lib/InputOutput.h"
 
 int main(void){
@@ -22,7 +22,7 @@ int main(void){
 
     mostraNotifiche(&coda);
 
-    int opt;
+    int opt=-1;
     do{
         printf("\n=== GestBib ===\n");
         printf("(1)  Aggiungi libro\n");
@@ -39,10 +39,15 @@ int main(void){
         printf("(12) Statistiche\n");
         printf("(0)  Esci\n");
         printf("Scelta: ");
-        scanf("%d", &opt);
 
+        if(scanf("%d", &opt)!=1){
+            if(feof(stdin)){ opt=0; break; }
+            int c; while((c=getchar())!='\n' && c!=EOF){}
+            printf("Scelta non valida.\n");
+            continue;
+        }
         switch(opt){
-            case 1: 
+            case 1:  
                 aggiungiLibro(&catalogo);
                 break;
             case 2: 
@@ -75,16 +80,17 @@ int main(void){
             case 11: 
                 mostraScaduti(&anagrafica);
                 break;
-            case 12: 
+            case 12:
                 mostraStatistiche(&catalogo, &anagrafica);
                 break;
             case 0: 
-                printf("Uscita.\n");
+                printf("Uscita.\n"); 
                 break;
-            default:
+            default: 
                 printf("Scelta non valida.\n");
+                break;
         }
-    }while (opt!=0);
+    } while(opt!=0);
 
     salvaLibri(&catalogo);
     salvaUtenti(&anagrafica);

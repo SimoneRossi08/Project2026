@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../lib/utilis.h"
+#include "../lib/statistiche.h"
 #include "../lib/lending.h"
 
 #define BAR_MAX 30
@@ -28,7 +28,7 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
     Libro* libroTop=NULL;
     int maxPrestiti=0;
     for(int i=0; i<catalogo->size; i++){
-        if (catalogo->libri[i]->volte_prestato>maxPrestiti){
+        if(catalogo->libri[i]->volte_prestato>maxPrestiti){
             maxPrestiti=catalogo->libri[i]->volte_prestato;
             libroTop=catalogo->libri[i];
         }
@@ -36,31 +36,29 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
     printf("\n--- Libro piu' prestato ---\n");
     if(libroTop!=NULL && maxPrestiti>0){
         printf("\"%s\" - %d prestiti\n", libroTop->titolo, maxPrestiti);
-    }
-    else{
+    } else{
         printf("Nessun prestito ancora effettuato.\n");
     }
 
     Utente* utenteTop=NULL;
     int maxStorico=0;
     for(int i=0; i<anagrafica->size; i++){
-        if (anagrafica->utenti[i]->storico_count>maxStorico){
+        if(anagrafica->utenti[i]->storico_count>maxStorico){
             maxStorico=anagrafica->utenti[i]->storico_count;
             utenteTop=anagrafica->utenti[i];
         }
     }
     printf("\n--- Utente piu' attivo ---\n");
-    if (utenteTop!=NULL && maxStorico>0){
+    if(utenteTop!=NULL && maxStorico>0){
         printf("%s - %d prestiti totali\n", utenteTop->nome, maxStorico);
-    }
-    else{
+    } else{
         printf("Nessun utente ha effettuato prestiti.\n");
     }
 
     int totale=0;
     int attivi=0;
     for(int i=0; i<anagrafica->size; i++){
-        totale+=anagrafica->utenti[i]->storico_count;
+        totale += anagrafica->utenti[i]->storico_count;
         NodoPrestito* current=anagrafica->utenti[i]->prestiti;
         while(current!=NULL){
             attivi++;
@@ -71,8 +69,8 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
     printf("\n--- Tasso di restituzione ---\n");
     if(totale>0){
         int percentuale=restituiti * 100 / totale;
-        printf("Restituiti %d/%d (%d%%)\n", restituiti, totale, percentuale);
-    }else{
+        printf("Restituiti %d/%d(%d%%)\n", restituiti, totale, percentuale);
+    } else{
         printf("Nessun prestito ancora effettuato.\n");
     }
 
@@ -97,8 +95,8 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
                 }
             }
             if(trovato>=0){
-                conteggi[trovato]+=libro->volte_prestato;
-            }else{
+                conteggi[trovato] += libro->volte_prestato;
+            } else{
                 strcpy(generi[numGeneri], libro->genere);
                 conteggi[numGeneri]=libro->volte_prestato;
                 numGeneri++;
@@ -113,7 +111,7 @@ void mostraStatistiche(Catalogo* catalogo, Anagrafica* anagrafica){
 
     int massimo=0;
     for(int i=0; i<numGeneri; i++){
-        if (conteggi[i]>massimo){
+        if(conteggi[i]>massimo){
             massimo=conteggi[i];
         }
     }

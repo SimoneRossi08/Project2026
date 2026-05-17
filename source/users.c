@@ -19,7 +19,7 @@ void liberaAnagrafica(Anagrafica* anagrafica){
     for(int i=0; i<anagrafica->size; i++){
         Utente* utente=anagrafica->utenti[i];
         NodoPrestito* current=utente->prestiti;
-        while (current!=NULL){
+        while(current!=NULL){
             NodoPrestito* temp=current;
             current=current->next;
             free(temp->prestito);
@@ -38,7 +38,7 @@ void inserisciUtente(Anagrafica* anagrafica, Utente* utente){
     }
     anagrafica->utenti[anagrafica->size]=utente;
     anagrafica->size++;
-    if (utente->id>=anagrafica->next_id){
+    if(utente->id>=anagrafica->next_id){
         anagrafica->next_id=utente->id + 1;
     }
 }
@@ -51,11 +51,11 @@ void registraUtente(Anagrafica* anagrafica){
     utente->storico_count=0;
 
     printf("Nome utente: ");
-    scanf(" %[^\n]", utente->nome);
+    scanf(" %99[^\n]", utente->nome);
 
     inserisciUtente(anagrafica, utente);
     salvaUtenti(anagrafica);
-    printf("Utente registrato (ID: %d).\n", utente->id);
+    printf("Utente registrato(ID: %d).\n", utente->id);
 }
 
 void eliminaUtente(Anagrafica* anagrafica){
@@ -134,19 +134,19 @@ void mostraStorico(Anagrafica* anagrafica){
         char data[64];
         struct tm* tm_info=localtime(&prestito->dataScadenza);
         strftime(data, sizeof(data), "%Y-%m-%d", tm_info);
-        printf("  - \"%s\" (scadenza: %s)\n", prestito->libro->titolo, data);
+        printf("  - \"%s\"(scadenza: %s)\n", prestito->libro->titolo, data);
         n++;
         current=current->next;
     }
     if(n==0){
-        printf("  (nessun prestito attivo)\n");
+        printf(" (nessun prestito attivo)\n");
     }
     printf("Totale prestiti effettuati nel tempo: %d\n", utente->storico_count);
 }
 
 Utente* trovaUtentePerId(Anagrafica* anagrafica, int id){
     for(int i=0; i<anagrafica->size; i++){
-        if (anagrafica->utenti[i]->id==id){
+        if(anagrafica->utenti[i]->id==id){
             return anagrafica->utenti[i];
         }
     }
@@ -174,7 +174,7 @@ void rimuoviPrestito(Utente* utente, Prestito* prestito){
 
     NodoPrestito* current=utente->prestiti;
     while(current->next!=NULL){
-        if (current->next->prestito==prestito){
+        if(current->next->prestito==prestito){
             NodoPrestito* temp=current->next;
             current->next=current->next->next;
             free(temp);

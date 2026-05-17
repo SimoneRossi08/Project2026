@@ -12,7 +12,7 @@ typedef struct Prestito{
     Utente* utente;
     time_t dataPrestito;
     time_t dataScadenza;
-}Prestito;
+} Prestito;
 
 void creaPrestito(Catalogo* catalogo, Anagrafica* anagrafica);
 void restituisciPrestito(Catalogo* catalogo, Anagrafica* anagrafica);

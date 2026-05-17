@@ -12,8 +12,8 @@
                 "${workspaceFolder}/gestbib/source/books.c",
                 "${workspaceFolder}/gestbib/source/users.c",
                 "${workspaceFolder}/gestbib/source/lending.c",
-                "${workspaceFolder}/gestbib/source/notify.c",
-                "${workspaceFolder}/gestbib/source/utilis.c",
+                "${workspaceFolder}/gestbib/source/notifiche.c",
+                "${workspaceFolder}/gestbib/source/statistiche.c",
                 "${workspaceFolder}/gestbib/source/InputOutput.c",
                 "-o",
                 "${workspaceFolder}/gestbib/gestbib"

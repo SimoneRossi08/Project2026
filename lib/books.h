@@ -11,14 +11,14 @@ typedef struct Libro{
     char genere[100];
     int copie;
     int volte_prestato;
-}Libro;
+} Libro;
 
 typedef struct Catalogo{
     Libro** libri;
     int size;
     int capacity;
     int next_id;
-}Catalogo;
+} Catalogo;
 
 struct Anagrafica;
 

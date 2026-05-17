@@ -21,7 +21,7 @@ void creaPrestito(Catalogo* catalogo, Anagrafica* anagrafica){
         printf("Libro o utente non trovati.\n");
         return;
     }
-    if(libro->copie<=0){
+    if(libro->copie <= 0){
         printf("Errore: nessuna copia disponibile.\n");
         return;
     }
@@ -93,12 +93,12 @@ void mostraScaduti(Anagrafica* anagrafica){
     for(int i=0; i<anagrafica->size; i++){
         Utente* utente=anagrafica->utenti[i];
         NodoPrestito* current=utente->prestiti;
-        while (current!=NULL){
-            if (current->prestito->dataScadenza<adesso){
+        while(current!=NULL){
+            if(current->prestito->dataScadenza<adesso){
                 char data[64];
                 struct tm* tm_info=localtime(&current->prestito->dataScadenza);
                 strftime(data, sizeof(data), "%Y-%m-%d", tm_info);
-                printf("SCADUTO: utente %s - libro \"%s\" (scadenza: %s)\n",
+                printf("SCADUTO: utente %s - libro \"%s\"(scadenza: %s)\n",
                        utente->nome, current->prestito->libro->titolo, data);
                 trovati++;
             }
